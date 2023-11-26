@@ -8,12 +8,11 @@ jobs:
     container:
       image: zmkfirmware/zmk-build-arm:stable
     name: Build
-    env:
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Cache west modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: cache-zephyr-modules
         with:
@@ -34,10 +33,6 @@ jobs:
         run: west update
       - name: West Zephyr export
         run: west zephyr-export
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '12'
       - name: West Build (bt60)
         run: west build -s zmk/app -b bt60 -- -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
       - name: bt60 Kconfig file
