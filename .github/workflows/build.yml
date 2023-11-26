@@ -8,11 +8,13 @@ jobs:
     container:
       image: zmkfirmware/zmk-build-arm:stable
     name: Build
+    env:
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
       - name: Cache west modules
-        uses: actions/cache@v4
+        uses: actions/cache@v2
         env:
           cache-name: cache-zephyr-modules
         with:
